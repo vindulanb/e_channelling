@@ -1,0 +1,33 @@
+server.out: error.o wrapunix.o wrapsock.o wraplib.o wrapstdio.o tcpserv04.o readline.o writen.o str_echo.o signal.o sigchldwaitpid.o
+	cc -o server.out str_echo.o error.o wrapunix.o wrapsock.o wraplib.o wrapstdio.o tcpserv04.o readline.o writen.o signal.o sigchldwaitpid.o
+
+error.o: error.c utils.h
+	cc -c error.c
+
+wrapunix.o: wrapunix.c utils.h
+	cc -c wrapunix.c
+
+wrapsock.o: wrapsock.c utils.h
+	cc -c wrapsock.c
+
+wraplib.o: wraplib.c utils.h
+	cc -c wraplib.c
+
+wrapstdio.o: wrapstdio.c utils.h
+	cc -c wrapstdio.c
+
+tcpserv04.o: tcpserv04.c utils.h
+	cc -c tcpserv04.c
+
+str_echo.o: str_echo.c utils.h
+	cc -c str_echo.c
+
+readline.o: readline.c utils.h
+	cc -c readline.c
+
+writen.o: writen.c utils.h
+	cc -c writen.c
+signal.o: signal.c utils.h
+	cc -c signal.c
+sigchldwaitpid.o: sigchldwaitpid.c utils.h
+	cc -c sigchldwaitpid.c

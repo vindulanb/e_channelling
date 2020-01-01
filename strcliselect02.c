@@ -1,0 +1,42 @@
+#include	"utils.h"		/* Header file */
+//[Refered file] This file is referd and mainly based on Practical 5 of DCCN3 module in (SLIIT)Srilanka institute of information technology.
+void
+str_cli(FILE *fp, int sockfd)
+{
+	int			maxfdp1, stdineof;
+	fd_set		rset;
+	char		sendline[MAXLINE], recvline[MAXLINE];
+
+	stdineof = 0;
+	FD_ZERO(&rset);
+	for ( ; ; ) {
+		if (stdineof == 0)
+			FD_SET(fileno(fp), &rset);
+		FD_SET(sockfd, &rset);
+		maxfdp1 = max(fileno(fp), sockfd) + 1;
+		Select(maxfdp1, &rset, NULL, NULL, NULL);
+
+		if (FD_ISSET(sockfd, &rset)) {	/* socket is readable */
+			if (Readline(sockfd, recvline, MAXLINE) == 0) {
+				if (stdineof == 1)
+					return;		/* normal termination */
+				else
+					err_quit("str_cli: server terminated prematurely");
+			}
+
+			Fputs(recvline, stdout);
+		}
+
+		if (FD_ISSET(fileno(fp), &rset)) {  /* input is readable */
+			if (Fgets(sendline, MAXLINE, fp) == NULL) {
+				stdineof = 1;
+                //Use shutdown() system call
+
+                FD_CLR(fileno(fp), &rset);
+				continue;
+			}
+
+			Writen(sockfd, sendline, strlen(sendline));
+		}
+	}
+}

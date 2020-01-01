@@ -1,0 +1,7 @@
+054,Manil piris   ,card,0,0,0
+055,Sepalika      ,immu,0,1,1
+056,Kaplilarathne ,derm,1,0,1
+057,C.Ranaraja    ,gene,0,0,1
+058,M.Ekanayake   ,andr,0,1,0
+059,A.B.Wijesinghe,card,1,0,1
+060,A.P.R.Nawaz   ,card,0,0,1
